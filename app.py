@@ -2,7 +2,7 @@
 
 #imports 
 #use flask to render a template, redirecting to another url, and creating a url
-import flask from Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for
 #use pymongo to interact with mongo database
 from flask_pymongo import PyMongo 
 #to use the scraping code, convert from jupyter notebook to python
@@ -15,7 +15,7 @@ app = Flask(__name__)
 #use flask_pymongo to setup mongo connection
 #This URI is saying that the app can reach Mongo through our localhost server, 
 #using port 27017, using a database named "mars_app"
-app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_app"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/mars"
 mongo = PyMongo(app)
 
 #define the route for the html page
@@ -24,7 +24,7 @@ def index():
     mars = mongo.db.mars.find_one()
     return render_template("index.html", mars = mars)
 
-@app.route('/scraping')
+@app.route('/scrape')
 def scrape():
     #new variable that points to mars database
     mars = mongo.db.mars 
