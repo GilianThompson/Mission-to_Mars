@@ -118,14 +118,11 @@ def mars_urls(browser):
     for hemi in element:
         hemispheres = {}
         href = hemi.h3.text #also the title 
-        print(href)
         browser.click_link_by_partial_text(href)
         new_page = browser.html
         new_soup_again = soup(new_page, "html.parser")
         img_url = new_soup_again.find('img', class_="wide-image").get("src")
-        print(img_url)
         img_url_1 = url+img_url
-        img_url_1
         hemispheres['img_url'] = img_url_1
         hemispheres['title'] = href
         hemisphere_image_urls.append(hemispheres)
